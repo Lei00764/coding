@@ -43,7 +43,7 @@ class MultiHeadAttention(nn.Module):
         V = self.W_V(x).view(B, L, self.num_heads, head_dim)
 
         # 计算注意力分数
-        attention_score = Q @ K.transpose(-2, -1) / head_dim ** 0.5
+        attention_score = Q @ K.transpose(-2, -1) / head_dim**0.5
         attention_score = self.softmax(attention_score)
 
         # 计算注意力值
@@ -53,7 +53,7 @@ class MultiHeadAttention(nn.Module):
 
 
 if __name__ == "__main__":
-    x = torch.rand(2, 10, 512)
+    x = torch.rand(2, 10, 512)  # [batch_size, seq_len, embed_dim]
     multi_head_attention = MultiHeadAttention(512, 8)
     output = multi_head_attention(x)
     print(output.shape)  # torch.Size([2, 10, 512])
